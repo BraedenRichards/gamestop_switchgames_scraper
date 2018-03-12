@@ -12,10 +12,15 @@ url = 'https://www.gamestop.com/browse/games/nintendo-switch?nav=28-xu0,13ffff24
 url_base = 'https://www.gamestop.com'
 
 titles = []
-prices = []
-condition = []
-while(url != url_base):
-	print("Starting: " + url + "\n")
+prices = [] 
+condition = [] # New/Used/Download
+
+page_counter = 0
+all_pages_done_flag = False # True when there are no more pages to scrape
+while(not all_pages_done_flag):
+	page_counter += 1
+	print("Starting page #" + " : " + url + "\n")
+
 	uClient = uReq(url)
 	page_html = uClient.read()
 	uClient.close()
@@ -35,7 +40,7 @@ while(url != url_base):
 		condition.append(price.h4.find("strong").getText())
 
 	if (soup.find("div", {"class" : "pagination_controls"}).find("a", {"class" : "next_page"})) is None:
-		url = url_base
+		all_pages_done_flag = True
 	else:
 		url = url_base + soup.find("div", {"class" : "pagination_controls"}).find("a", {"class" : "next_page"}).get("href")
 
@@ -95,7 +100,7 @@ for title in titles:
 	ws[str(cell_col_price) + str(cell_row)].font = Font(size=13)
 	ws[str(cell_col_price) + str(cell_row)].alignment = Alignment(vertical='center', horizontal='center')
 	
-	ws[str(cell_col_markup) + str(cell_row)] = (stock_price + (stock_price * 0.8265))
+	ws[str(cell_col_markup) + str(cell_row)] = (stock_price * 0.8265)
 	ws[str(cell_col_markup) + str(cell_row)].fill = PatternFill(fgColor="53f442", fill_type = "solid")
 	ws[str(cell_col_markup) + str(cell_row)].font = Font(size=13)
 	ws[str(cell_col_markup) + str(cell_row)].alignment = Alignment(vertical='center', horizontal='center')

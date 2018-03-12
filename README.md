@@ -1,0 +1,1 @@
+# gamestop_switchgames_scraper

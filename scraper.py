@@ -8,19 +8,19 @@ from bs4 import BeautifulSoup
 from openpyxl import Workbook
 from openpyxl.styles import PatternFill, Font, Alignment
 
-url_next = 'https://www.gamestop.com/browse/games/nintendo-switch?nav=28-xu0,13ffff2418-1e8'
-url_to_add = 'https://www.gamestop.com'
+url = 'https://www.gamestop.com/browse/games/nintendo-switch?nav=28-xu0,13ffff2418-1e8'
+url_base = 'https://www.gamestop.com'
 
 titles = []
 prices = []
 condition = []
-while(url_next != url_to_add):
-	print("Starting: " + url_next + "\n")
-	uClient = uReq(url_next)
+while(url != url_base):
+	print("Starting: " + url + "\n")
+	uClient = uReq(url)
 	page_html = uClient.read()
 	uClient.close()
 
-	url_next = ''
+	url = ''
 
 	soup = BeautifulSoup(page_html, "html.parser")
 
@@ -35,9 +35,9 @@ while(url_next != url_to_add):
 		condition.append(price.h4.find("strong").getText())
 
 	if (soup.find("div", {"class" : "pagination_controls"}).find("a", {"class" : "next_page"})) is None:
-		url_next = url_to_add
+		url = url_base
 	else:
-		url_next = url_to_add + soup.find("div", {"class" : "pagination_controls"}).find("a", {"class" : "next_page"}).get("href")
+		url = url_base + soup.find("div", {"class" : "pagination_controls"}).find("a", {"class" : "next_page"}).get("href")
 
 
 # Open Excel workbook object

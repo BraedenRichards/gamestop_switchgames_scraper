@@ -25,8 +25,6 @@ while(not all_pages_done_flag):
 	page_html = uClient.read()
 	uClient.close()
 
-	url = ''
-
 	soup = BeautifulSoup(page_html, "html.parser")
 
 	products = soup.findAll("div", {"class" : "product"})
@@ -100,7 +98,7 @@ for title in titles:
 	ws[str(cell_col_price) + str(cell_row)].font = Font(size=13)
 	ws[str(cell_col_price) + str(cell_row)].alignment = Alignment(vertical='center', horizontal='center')
 	
-	ws[str(cell_col_markup) + str(cell_row)] = (stock_price * 0.8265)
+	ws[str(cell_col_markup) + str(cell_row)] = (stock_price + (stock_price* 0.08265)
 	ws[str(cell_col_markup) + str(cell_row)].fill = PatternFill(fgColor="53f442", fill_type = "solid")
 	ws[str(cell_col_markup) + str(cell_row)].font = Font(size=13)
 	ws[str(cell_col_markup) + str(cell_row)].alignment = Alignment(vertical='center', horizontal='center')

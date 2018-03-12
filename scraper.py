@@ -13,13 +13,13 @@ url_base = 'https://www.gamestop.com'
 
 titles = []
 prices = [] 
-condition = [] # New/Used/Download
+condition = [] # New/Pre-Owned/Download
 
 page_counter = 0
 all_pages_done_flag = False # True when there are no more pages to scrape
 while(not all_pages_done_flag):
 	page_counter += 1
-	print("Starting page #" + " : " + url + "\n")
+	print("Starting page #", page_counter, " : " + url + "\n")
 
 	uClient = uReq(url)
 	page_html = uClient.read()
@@ -98,7 +98,7 @@ for title in titles:
 	ws[str(cell_col_price) + str(cell_row)].font = Font(size=13)
 	ws[str(cell_col_price) + str(cell_row)].alignment = Alignment(vertical='center', horizontal='center')
 	
-	ws[str(cell_col_markup) + str(cell_row)] = (stock_price + (stock_price* 0.08265)
+	ws[str(cell_col_markup) + str(cell_row)] = (stock_price + (stock_price* 0.08265))
 	ws[str(cell_col_markup) + str(cell_row)].fill = PatternFill(fgColor="53f442", fill_type = "solid")
 	ws[str(cell_col_markup) + str(cell_row)].font = Font(size=13)
 	ws[str(cell_col_markup) + str(cell_row)].alignment = Alignment(vertical='center', horizontal='center')

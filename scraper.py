@@ -37,10 +37,11 @@ while(not all_pages_done_flag):
 		prices.append(price.p.getText())
 		condition.append(price.h4.find("strong").getText())
 
-	if (soup.find("div", {"class" : "pagination_controls"}).find("a", {"class" : "next_page"})) is None:
+	next_url_extension = soup.find("div", {"class" : "pagination_controls"}).find("a", {"class" : "next_page"})
+	if next_url_extension is None:
 		all_pages_done_flag = True
 	else:
-		url = url_base + soup.find("div", {"class" : "pagination_controls"}).find("a", {"class" : "next_page"}).get("href")
+		url = url_base + next_url_extension.get("href")
 
 
 # Open Excel workbook object
@@ -98,7 +99,7 @@ for title in titles:
 	ws[str(cell_col_price) + str(cell_row)].font = Font(size=13)
 	ws[str(cell_col_price) + str(cell_row)].alignment = Alignment(vertical='center', horizontal='center')
 	
-	ws[str(cell_col_markup) + str(cell_row)] = (stock_price + (stock_price* 0.08265))
+	ws[str(cell_col_markup) + str(cell_row)] = (stock_price + (stock_price * 0.08265))
 	ws[str(cell_col_markup) + str(cell_row)].fill = PatternFill(fgColor="53f442", fill_type = "solid")
 	ws[str(cell_col_markup) + str(cell_row)].font = Font(size=13)
 	ws[str(cell_col_markup) + str(cell_row)].alignment = Alignment(vertical='center', horizontal='center')

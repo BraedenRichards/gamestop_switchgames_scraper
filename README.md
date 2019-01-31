@@ -1,6 +1,12 @@
-# gamestop_switchgames_scraper
+# Gamestop Webscraper for Switch Games
 
-> Use Python3
-> Run in command line using 'python3 scraper.py'
-> Generates a .xlsx file where the data scraped is stored
-> Program scrapes the titles, prices, prices with Nevada sales tax added, and condition (new/pre-owned) of Nintendo Switch games from GameStop's website
+**THIS PROJECT IS NO LONGER UPDATED/SUPPORTED AND THEREFORE MOST LIKELY NO LONGER FUNCTIONS PROPERLY SINCE GAMESTOP.COM'S CODING STRUCTURE CHANGES OVERTIME, ESPECIALLY SINCE THEY USE ANTI-SCRAPING TECHNIQUES THAT CHANGE OVER TIME**
+
+## Purpose
+Scrapes all the new/used games from Gamestop's website and unloades the information into a .xlsx file. Organizes games by new/used/on sale and color codes accordingly. 
+
+## Requirements
+```
+Python3
+BeautifulSoup
+```
